@@ -1,0 +1,28 @@
+<%= stylesheet_link_tag("application") %>
+  <%= javascript_include_tag "application" %>
+<div id="event_detail">
+  <h3><%= @event.name%></h3>
+  <hr />
+  <h4><%= @event.description%></h4>
+  <hr />
+  <h5>Start time: <%= @event.start_at%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End time: <%= @event.end_at%></h5>
+  <hr />
+  <% if !@event.circle.nil? %>
+  <table>
+    <tr><td colspan = "4">Attending:</td><tr>
+    <tr>
+    <% @event.circle.users.each do |user | %>
+    <td>&nbsp;
+    <%= user.name %>
+    </td>
+    <% end %>
+    <tr>
+  </table>
+  <hr />
+  <% end %>
+  <button class="button button-gray">
+  <span class="bin"></span>
+  <%= link_to "Delete event", event_path(@event), :remote => true,  :method => 'delete'%>
+  </button>
+</div>
+

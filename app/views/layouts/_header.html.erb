@@ -1,0 +1,45 @@
+<header>
+  <div class="container_8 clearfix">
+    <h1 class="grid_1"><%= link_to "SproutCalendar", root_path %></h1>
+    <nav class="grid_5">
+      <ul class="clearfix">
+        <li class="action">
+          <a href="#" class="has-popupballoon button button-blue"><span class="add"></span>New Circle</a>
+          <div class="popupballoon top">
+            <h3>Add new circle</h3>
+            <%=form_for([Circle.new]) do |f| %>
+            Circle Name<br />
+            <input type="text" name = "circle[name]"/><br />
+            Assign members.<br />
+            <% @users = User.all %>
+            <% @users.each do |member| %>
+              <%= check_box_tag 'circle[user_ids][]', member.id %> <%=member.name != "" && member.name != nil ? member.name : member.email %><% if current_user == member%> (Me) <% end %><br/>
+            <% end %>
+            <hr />
+            <button class="button button-orange">Add circle
+            <button class="button button-gray close">Cancel</button>
+            <% end %>
+          </div>
+        </li>
+        <li class="action">
+          <a href="#" class="has-popupballoon button button-blue"><span class="add"></span>New Event</a>
+          <div class="popupballoon top" id = "create_event_popup">
+           <%= render 'events/form'%>
+        </div>
+      </li>
+          <li class="fr"><%= link_to current_user.name != "" && current_user.name!=nil ? current_user.name : current_user.email , "#"%><span class="arrow-down"></span>
+            <ul>
+              <li><%= link_to "Account Settings", edit_user_registration_path%></li>
+              <li><%= link_to "Circles", circles_path%></li>
+              <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nav>
+      <form class="grid_2">
+        <input class="full" type="text" placeholder="Search..." />
+      </form>
+    </div>
+  </header>
+
