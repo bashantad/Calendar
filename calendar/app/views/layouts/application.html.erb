@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SproutCalendar</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="wrapper">
+    <% if user_signed_in? %>
+    <%= render "layouts/header" %>
+    <%= render "layouts/sidebar" %>
+       <% end %>
+   <!-- Main Section -->
+    <section class="main-section grid_7"><% if !user_signed_in? %> <h1>SproutCalander</h1> <% end %>
+      <div class="main-content">
+      <% if !notice.nil? %>
+      <p class="notice message success"><%= notice %></p>
+      <% end %>
+            <% if !alert.nil? %>
+        <p class="alert message error"><%= alert %></p>
+        <% end %>
+        <%= yield %>
+      </div>
+    </section>
+    <!-- Main Section End -->
+
+  </div>
+</section>
+
+</div>
+ <% if user_signed_in? %>
+<%= render 'layouts/footer' %>
+<% end %>
+</body>
+</html>
+

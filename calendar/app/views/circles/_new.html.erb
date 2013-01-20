@@ -1,0 +1,22 @@
+<div class ="circles">
+  <h2>Create a new Circle</h2>
+  <%=form_for(Circle.new) do |f| %>
+  <%=f.label(:name) %><br />
+  <%=f.text_field(:name,:placeholder=>"Name can't be blank") %><br />
+  <%=f.hidden_field(:created_at)%>
+  <%= f.label :Assign_members %><br />
+  <%  @users = User.all%>
+  <% @users.each do |member| %>
+  <ul>
+    <li>
+      <label>
+        <%= check_box_tag 'circle[user_ids][]', member.id, false, :id => "check_member_#{member.id}" %> 
+        <%= member.name != "" && member.name != nil ? member.name : member.email%><% if current_user == member%> (Me) <% end %> 
+      </label>
+    </li>
+  </ul>
+  <% end %>
+  <%=f.submit%>
+  <% end %>
+</div>
+

@@ -1,0 +1,16 @@
+ <%= form_for(Event.new, remote: true ) do |f| %>
+    <h3>Add new event</h3>
+    <input type="text" name= "task[name]" id ="name"/><br /><br />
+    <h3>Description</h3>
+    <textarea name= "task[description]" cols ="25" id = "description"/></textarea><br /><br />
+    Start date?<br />
+    <input type="date" name= "task[start_at]" id = "start_at"/><br />
+    End date?<br />
+    <input type="date" name= "task[end_at]" id = "end_at"/><br />
+    Visible to?<br />
+    <%= select("task", "circle_id", Circle.all.collect {|lang| [ lang.name, lang.id ] }, {:include_blank => 'Only me'}) %>
+    <hr />
+    <button class="button button-orange">Add event
+    </button>
+    <button class="button button-gray close">Cancel</button>
+<% end %>
